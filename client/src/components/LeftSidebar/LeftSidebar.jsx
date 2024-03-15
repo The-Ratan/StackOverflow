@@ -23,28 +23,28 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
       style={slideIn ? slideInStyle : slideOutStyle}
     >
       <nav className={`side-nav`}>
-        <button onClick={() => handleSlideIn()} className="nav-btn">
+        <button onClick={() => handleSlideIn} className="nav-btn">
           <NavLink to="/" className={`side-nav-links ${darkMode ? "text-white" : "text-black"}`}    activeclassname="active">
             <p className=" font-bold">Home</p>
           </NavLink>
         </button>
-        <button onClick={() => handleSlideIn()} className="nav-btn">
+        <button onClick={() => handleSlideIn} className="nav-btn">
           <NavLink to="/chatbot"  className={`side-nav-links ${darkMode ? "text-white" : "text-black"}`} activeclassname="active">
             <p className=" font-bold mt-2">ChatBot</p>
           </NavLink>
         </button>
         <div className="side-nav-div">
-        <button onClick={() => handleSlideIn()} className="nav-btn">
+        <button onClick={() => handleSlideIn} className="nav-btn">
           <NavLink to="/public"  className={`side-nav-links ${darkMode ? "text-white" : "text-black"}`} activeclassname="active">
             <p className=" font-bold">PUBLIC</p>
           </NavLink>
         </button>
-        <button onClick={() => handleSlideIn()} className="nav-btn">
+        <button onClick={() => handleSlideIn} className="nav-btn">
           <NavLink to="/subscription"  className={`side-nav-links ${darkMode ? "text-white" : "text-black"}`} activeclassname="active">
             <p className=" font-bold">SUBSCRIPTION</p>
           </NavLink>
         </button>
-          <button onClick={() => handleSlideIn()} className="nav-btn">
+          <button onClick={() => handleSlideIn} className="nav-btn">
             <NavLink
               to="/Questions"
                className={`side-nav-links ${darkMode ? "text-white" : "text-black"}`}
@@ -54,7 +54,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
               <p style={{ paddingLeft: "10px" }} className=" font-bold"> Questions </p>
             </NavLink>
           </button>
-          <button onClick={() => handleSlideIn()} className="nav-btn">
+          <button onClick={() => handleSlideIn} className="nav-btn">
             <NavLink
               to="/Tags"
                className={`side-nav-links ${darkMode ? "text-white" : "text-black"}`}
@@ -64,7 +64,7 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
               <p className=" font-bold">Tags</p>
             </NavLink>
           </button>
-          <button onClick={() => handleSlideIn()} className="nav-btn">
+          <button onClick={() => handleSlideIn} className="nav-btn">
             <NavLink
               to="/Users"
                className={`side-nav-links ${darkMode ? "text-white" : "text-black"}`}
