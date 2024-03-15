@@ -6,9 +6,13 @@ import AddPublicInfo from './UploadPublic';
 import { useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import axios from 'axios'
+import { Audio } from 'react-loader-spinner'
 import { IoAddCircle } from "react-icons/io5";
+import { darkModes } from '../../actions/DarkMode';
+import { useRecoilValue } from 'recoil';
 
 const DisplayPublicPage = () => {
+  const darkMode = useRecoilValue(darkModes)
   const [tweet,setTweet] = useState([]);
   const [image,setimage] = useState([]);
   const [video,setvideo] = useState([]);
@@ -158,18 +162,29 @@ const gotoTweet = ()=>{
       <div className="tweeeet">
         <h1 style={{textAlign:"center"}} className='mb-5 font-bold text-2xl'>Tweets</h1>
         {
-  tweet.map((e, index) => {
-    return (
-      <div className=" border rounded-lg p-4 my-4" key={index}>
-        <p className="messsss">{e.tweet}</p>
-        <div className="extra-Details mt-2">
-        {User?.result.email === e.email && <MdDelete className='w-[190%] hover:text-red-900 text-red-500 cursor-pointer mb-2 text-2xl flex items-end justify-end' onClick={()=>deleteTweet(e._id)}/>}
-          <p className="text-sm">Posted by: <span className="font-bold">{e.postedBy}</span></p>
-          <p className="text-sm">Posted at: <span className="font-bold">{moment(e.createAt).fromNow()}</span></p>
+    tweet.length >= 1 ? tweet.map((e, index) => {
+      return (
+        <div className=" border rounded-lg p-4 my-4" key={index}>
+          <p className="messsss">{e.tweet}</p>
+          <div className="extra-Details mt-2">
+          {User?.result.email === e.email && <MdDelete className='w-[190%] hover:text-red-900 text-red-500 cursor-pointer mb-2 text-2xl flex items-end justify-end' onClick={()=>deleteTweet(e._id)}/>}
+            <p className="text-sm">Posted by: <span className="font-bold">{e.postedBy}</span></p>
+            <p className="text-sm">Posted at: <span className="font-bold">{moment(e.createAt).fromNow()}</span></p>
+          </div>
         </div>
-      </div>
-    )
-  })
+      )
+    }) : (          <div className="mt-10 flex items-center justify-center flex-col">
+    <Audio
+    height="80"
+    width="80"
+    radius="9"
+    color={`${darkMode ? "white" : "black"}`}
+    ariaLabel="loading"
+    wrapperStyle
+    wrapperClass
+  />
+  <h1 className="text-2xl ml-10">Loading Tweets...</h1>
+  </div>)
 }
 
       </div>
@@ -179,25 +194,36 @@ const gotoTweet = ()=>{
        <div className="imgggg hidden">
         <h1 style={{textAlign:"center"}} className='mb-5 font-bold text-2xl'>Images</h1>
         {
-  image.map((e, index) => {
-    return (
-      <div className="border rounded-lg overflow-hidden shadow-md my-4" key={index}>
-        <a href={e.imageUrl} target="_blank">
-          <img src={e.imageUrl} alt="img" className="w-full h-48 object-cover" />
-        </a>
-        <div className="p-4">
-          <p className="text-lg font-semibold mb-2">{e.imageCaption}</p>
-          <div className="extra-Details text-sm ">
-          {User?.result.email === e.email && <MdDelete className='w-[190%] hover:text-red-900 text-red-500 cursor-pointer mb-2 text-2xl flex items-end justify-end' onClick={()=>deleteImage(e._id)}/>}
-            <p>Posted by: <span className="font-semibold">{e.postedBy}</span></p>
-            <p>Posted at: <span className="font-semibold">{moment(e.createAt).fromNow()}</span></p>
+    image.length >= 1 ? image.map((e, index) => {
+      return (
+        <div className="border rounded-lg overflow-hidden shadow-md my-4" key={index}>
+          <a href={e.imageUrl} target="_blank" rel="noreferrer">
+            <img src={e.imageUrl} alt="img" className="w-full h-48 object-cover" />
+          </a>
+          <div className="p-4">
+            <p className="text-lg font-semibold mb-2">{e.imageCaption}</p>
+            <div className="extra-Details text-sm ">
+            {User?.result.email === e.email && <MdDelete className='w-[190%] hover:text-red-900 text-red-500 cursor-pointer mb-2 text-2xl flex items-end justify-end' onClick={()=>deleteImage(e._id)}/>}
+              <p>Posted by: <span className="font-semibold">{e.postedBy}</span></p>
+              <p>Posted at: <span className="font-semibold">{moment(e.createAt).fromNow()}</span></p>
+            </div>
           </div>
         </div>
-      </div>
-    )
-  })
+      )
+    }) 
+     : (          <div className="mt-10 flex items-center justify-center flex-col">
+     <Audio
+     height="80"
+     width="80"
+     radius="9"
+     color={`${darkMode ? "white" : "black"}`}
+     ariaLabel="loading"
+     wrapperStyle
+     wrapperClass
+   />
+   <h1 className="text-2xl ml-10">Loading Images...</h1>
+   </div>)
 }
-
 
       </div>
          {/*
@@ -206,7 +232,7 @@ const gotoTweet = ()=>{
                  <div className="vidddd hidden">
         <h1 style={{textAlign:"center"}} className='mb-5 font-bold text-2xl'>Videos</h1>
         {
-  video.map((e, index) => {
+  video.length >= 1 ? video.map((e, index) => {
     return (
       <div className="border rounded-lg overflow-hidden shadow-md my-4" key={index}>
         {uploadPublic ? "" :
@@ -222,7 +248,20 @@ const gotoTweet = ()=>{
         </div>
       </div>
     )
-  })
+  }): (
+    <div className="mt-10 flex items-center justify-center flex-col">
+    <Audio
+    height="80"
+    width="80"
+    radius="9"
+    color={`${darkMode ? "white" : "black"}`}
+    ariaLabel="loading"
+    wrapperStyle
+    wrapperClass
+  />
+  <h1 className="text-2xl ml-10">Loading Videos...</h1>
+  </div>
+  )
 }
 
       </div>

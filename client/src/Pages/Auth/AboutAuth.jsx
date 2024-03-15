@@ -1,9 +1,6 @@
 import React from "react";
-import { darkModes } from "../../actions/DarkMode";
-import { useRecoilValue } from "recoil";
 
 const AboutAuth = () => {
-  const darkMode = useRecoilValue(darkModes)
   return (
     <div className={`auth-container-1 `}>
       <h1>Join the Stack Overflow community</h1>

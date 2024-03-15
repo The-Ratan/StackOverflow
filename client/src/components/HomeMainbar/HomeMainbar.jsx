@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./HomeMainbar.css";
@@ -6,6 +6,7 @@ import QuestionList from "./QuestionList";
 import { MdDarkMode } from "react-icons/md";
 import { darkModes } from "../../actions/DarkMode";
 import { useRecoilState } from "recoil";
+import { Audio } from 'react-loader-spinner'
 
 const HomeMainbar = () => {
   const [darkMode,setDarkMode] = useRecoilState(darkModes)
@@ -48,7 +49,18 @@ const HomeMainbar = () => {
       </div>
       <div>
         {questionsList.data === null ? (
-          <h1>Loading...</h1>
+          <div className="mt-10 flex items-center justify-center flex-col">
+          <Audio
+          height="80"
+          width="80"
+          radius="9"
+          color={`${darkMode ? "white" : "black"}`}
+          ariaLabel="loading"
+          wrapperStyle
+          wrapperClass
+        />
+        <h1 className="text-2xl ml-10">Loading Questions...</h1>
+        </div>
         ) : (
           <>
             <p className="mt-5 mb-5">{questionsList.data.length} questions</p>
