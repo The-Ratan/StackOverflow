@@ -6,7 +6,7 @@ Installation
 
 Clone the Repository
 
-    git clone https://github.com/Ritik-The-Dev/Live-Chat-App-FullStack
+    git clone https://github.com/The-Ratan/StackOverflow
 
 Client Installation
 
