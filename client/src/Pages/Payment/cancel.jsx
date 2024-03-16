@@ -13,7 +13,7 @@ function Cancel() {
     }
   },[searchQuery])
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen ">
+    <div className="flex flex-col items-center justify-center h-full min-h-screen ">
     <h1 className="text-4xl font-bold mb-4 text-red-600 text-center">Oops! Your Payment Got Cancelled</h1>
     <h2 className="text-lg font-semibold mb-6">Something Went Wrong</h2>
     <Link to="/" className="text-white bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-lg text-lg transition duration-300 ease-in-out shadow-md">Back to Home</Link>

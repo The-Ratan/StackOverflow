@@ -8,14 +8,16 @@ import { MdDelete } from "react-icons/md";
 import axios from 'axios'
 import { Audio } from 'react-loader-spinner'
 import { IoAddCircle } from "react-icons/io5";
-import { darkModes } from '../../actions/DarkMode';
-import { useRecoilValue } from 'recoil';
+import { calleds, darkModes, images, tweets, videos } from '../../actions/DarkMode';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 const DisplayPublicPage = () => {
   const darkMode = useRecoilValue(darkModes)
-  const [tweet,setTweet] = useState([]);
-  const [image,setimage] = useState([]);
-  const [video,setvideo] = useState([]);
+  const [tweet,setTweet] = useRecoilState(tweets);
+  const [image,setimage] = useRecoilState(images);
+  const [video,setvideo] = useRecoilState(videos);
+  const [called,setcalled] = useRecoilState(calleds);
+  const [current,setCurrent] = useState("tweet")
   const [uploadPublic,setuploadPublic] = useState(false)
   const User = useSelector((state) => state.currentUserReducer);
 
@@ -111,9 +113,13 @@ const DisplayPublicPage = () => {
   }
   
   useEffect(()=>{
-    GetAllTweets();
-    getImage();
-    getVideo();
+    const fetchData = async()=>{
+    await GetAllTweets();
+    await getImage();
+    await getVideo();
+    setcalled(false)
+    }
+    called === true && fetchData()
   },[])
 
   //Change Hidden Property
@@ -121,7 +127,7 @@ const DisplayPublicPage = () => {
     let box1 = document.querySelector(".tweeeet")
     let box2 = document.querySelector(".imgggg")
     let box3 = document.querySelector(".vidddd")
-
+    setCurrent("image")
     box1.classList.add("hidden")
     box3.classList.add("hidden")
     box2.classList.remove("hidden")
@@ -130,7 +136,7 @@ const gotoVideo = ()=>{
     let box1 = document.querySelector(".tweeeet")
     let box2 = document.querySelector(".imgggg")
     let box3 = document.querySelector(".vidddd")
-
+    setCurrent("video")
     box1.classList.add("hidden")
     box2.classList.add("hidden")
     box3.classList.remove("hidden")
@@ -139,7 +145,7 @@ const gotoTweet = ()=>{
     let box1 = document.querySelector(".tweeeet")
     let box2 = document.querySelector(".imgggg")
     let box3 = document.querySelector(".vidddd")
-
+    setCurrent("tweet")
     box3.classList.add("hidden")
     box2.classList.add("hidden")
     box1.classList.remove("hidden")
@@ -154,9 +160,9 @@ const gotoTweet = ()=>{
       <h1  className='mb-5 text-center text-3xl font-bold flex items-center justify-between p-2'>Public Page
       <IoAddCircle className="text-5xl cursor-pointer text-blue-500" onClick={()=>setuploadPublic(true)}/></h1>
       <div className="btnss mb-5 font-bold">
-      <button className='text-black' onClick={gotoTweet}>Tweet Section</button>
-      <button className='text-black' onClick={GotoImage}>Image Section</button>
-      <button className='text-black' onClick={gotoVideo}>Video Section</button>
+      <button className={`${current === "tweet" ? "text-red-500" : "text-black"}`} onClick={gotoTweet}>Tweets </button>
+      <button className={`${current === "image" ? "text-red-500" : "text-black"}`} onClick={GotoImage}>Images </button>
+      <button className={`${current === "video" ? "text-red-500" : "text-black"}`} onClick={gotoVideo}>Videos </button>
       </div>
       
       <div className="tweeeet">

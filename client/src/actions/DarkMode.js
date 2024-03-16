@@ -12,3 +12,19 @@ export const chatResponse = atom({
     key:"chatResponse",
     default:[]
 })
+export const tweets = atom({
+    key:"tweets",
+    default:[]
+})
+export const images = atom({
+    key:"images",
+    default:[]
+})
+export const videos = atom({
+    key:"videos",
+    default:[]
+})
+export const calleds = atom({
+    key:"calleds",
+    default:true
+})

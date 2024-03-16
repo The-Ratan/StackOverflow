@@ -100,13 +100,15 @@ function Chat() {
   return (
     <>
       {userId ? (
-        <div className="main-bar">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold text-center">
+        <div className="lg:h-[93vh] w-full md:w-[50%] p-2 lg:w-[50%] md:h-[90vh] h-[81vh] " style={{marginTop:'3rem',overflow:"hidden"}}>
+          <div className="flex items-center justify-between h-5">
+            <h1 className="text-1xl lg:text-2xl md:text-2xl font-semibold text-center">
               AI Powered Chat Bot
             </h1>
             <button
-              className={`${
+              className={`
+               mt-2
+              ${
                 response.length === 0
                   ? "bg-gray-300"
                   : "bg-blue-500 hover:bg-blue-600"
@@ -116,9 +118,9 @@ function Chat() {
               Clear Chat
             </button>
           </div>
-          <div>
+          <div className="h-screen">
             <div
-              className="h-[75vh] lg:h-[78vh] md:h-[78vh] overflow-y-auto p-2 mb-2 rounded-lg mt-5"
+              className="h-[62vh] lg:h-[78vh] md:h-[78vh] overflow-y-auto p-2 mb-2 rounded-lg mt-5"
               style={{
                 scrollbarWidth: "thin",
                 scrollbarColor: "transparent transparent",

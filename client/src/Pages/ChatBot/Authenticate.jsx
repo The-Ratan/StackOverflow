@@ -81,11 +81,11 @@ function Authenticate() {
   return (
     <div>
       <section
-        className={`flex flex-col items-center justify-center h-screen min-w-[50%] ${
+        className={`flex flex-col items-center justify-center h-full min-h-screen min-w-[50%] ${
           darkMode ? "bg-slate-800 text-white" : "text-black"
         }`}
       >
-            <h1 className="text-2xl font-bold">Authenticate Using Otp to use AI Powered Chat Bot</h1>
+            <h1 className="flex text-center text-1xl lg:text-2xl md:text-2xl font-bold">Authenticate Using Otp to use AI Powered Chat Bot</h1>
             <br />
         <div className="Auth">
           <img src={icon} alt="stack overflow" className="login-logo" />
@@ -99,7 +99,7 @@ function Authenticate() {
                 id="email"
                 value={email}
                 onChange={(e) => {
-                  setEmail(e.target.value);
+                  setEmail(e.target.value.toLowerCase());
                 }}
               />
             </label>

@@ -7,7 +7,7 @@ import en from "bad-words-next/data/en.json";
 import Filter from "bad-words";
 import abusiveWords from "./abusiveWords.json";
 import { useRecoilValue } from "recoil";
-import { LocalUrl } from "../../api";
+import { LocalUrl, VideoUploadUrl } from "../../api";
 import { IoIosCloseCircle } from "react-icons/io";
 import {
   RegExpMatcher,
@@ -247,7 +247,7 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
           formData.append("email", email);
         }
 
-        const data = await fetch(`${LocalUrl}public/AddVideo`, {
+        const data = await fetch(`${VideoUploadUrl}public/AddVideo`, {
           method: "POST",
           body: formData,
         });
@@ -299,7 +299,7 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
   };
   return (
     <div className="fixed inset-0 overflow-y-auto bg-gray-500 bg-opacity-50 select-none">
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center h-full min-h-screen">
         <div className={`${darkMode ? "bg-slate-800" :"bg-white"} p-10 rounded-lg shadow-xl`}>
           <h1 className={`flex items-center justify-between text-2xl font-bold mb-4`}>
             Add Public info

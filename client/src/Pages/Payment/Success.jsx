@@ -38,7 +38,7 @@ function Success() {
 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center h-full min-h-screen">
     <h1 className="text-3xl font-bold mb-4 flex text-center">Congratulations! Your Payment Was Successful</h1>
     <h2 className="text-xl font-semibold mb-2">Your Reference ID:</h2>
     <span className='flex mb-8 items-center justify-center'>

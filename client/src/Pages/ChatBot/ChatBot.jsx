@@ -4,11 +4,8 @@ import Chat from "./Chat";
 
 const ChatBot = ({ slideIn }) => {
   return (
-    <div className="min-h-screen max-w-7xl w-full flex justify-between mx-auto overflow-hidden">
-      <LeftSidebar slideIn={slideIn} />
-      <div className="p-2 w-full flex items-center justify-center overflow-hidden">
+    <div className="flex items-center justify-center">
         <Chat />
-      </div>
     </div>
   );
 };

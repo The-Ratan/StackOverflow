@@ -22,10 +22,10 @@ const AllRoutes = ({ slideIn, handleSlideIn }) => {
         path="/"
         element={<Home slideIn={slideIn} handleSlideIn={handleSlideIn} />}
       />
-      <Route path="/Auth" element={<Auth />} />
-      <Route path="/cancel" element={<Cancel/>} />
-      <Route path="/success" element={<Success />} />
-      <Route path="/AskQuestion" element={<AskQuestion />} />
+      <Route path="/Auth" element={<Auth handleSlideIn={handleSlideIn}/>} />
+      <Route path="/cancel" element={<Cancel handleSlideIn={handleSlideIn}/>} />
+      <Route path="/success" element={<Success handleSlideIn={handleSlideIn}/>} />
+      <Route path="/AskQuestion" element={<AskQuestion handleSlideIn={handleSlideIn}/>} />
       <Route path="/chatbot" element={<ChatBot slideIn={slideIn} handleSlideIn={handleSlideIn}/>} />
       <Route path="/subscription" element={<Subscription slideIn={slideIn} handleSlideIn={handleSlideIn}/>} />
       <Route

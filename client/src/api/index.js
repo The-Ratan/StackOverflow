@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const LocalUrl = "http://localhost:5000/" 
+export const LocalUrl = "https://stack-ebon.vercel.app/"
+export const VideoUploadUrl = "https://test-trial.onrender.com/"
 
 const API = axios.create({
   baseURL: LocalUrl,
