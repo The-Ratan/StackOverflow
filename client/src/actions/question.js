@@ -8,6 +8,11 @@ export const askQuestion = (questionData, navigate) => async (dispatch) => {
     navigate("/");
   } catch (error) {
     alert(error?.response?.data)
+    if (error?.response?.data === "Your membership has expired. Please renew your plan to continue accessing premium features." ||
+      error?.response?.data === "Upgrade Your Plan to exceeded the daily limit of 1 questions." ||
+      error?.response?.data === "Upgrade Your Plan to exceeded the daily limit of 5 questions.") {
+    navigate('/subscription');
+  }
     console.log(error);
   }
 };
