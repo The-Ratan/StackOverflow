@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {darkModes} from '../../actions/DarkMode'
+import { darkModes } from "../../actions/DarkMode";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import badWords from "bad-words-next";
@@ -23,10 +23,14 @@ const filter = new Filter();
 filter.addWords(...abusiveWords.abusiveWords);
 const BADWORDS = new badWords({ data: en });
 
-const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
-  
-    const darkMode = useRecoilValue(darkModes)
-    const[showWarning,setshowWarning] = useState("")
+const AddPublicInfo = ({
+  setuploadPublic,
+  GetAllTweets,
+  getImage,
+  getVideo,
+}) => {
+  const darkMode = useRecoilValue(darkModes);
+  const [showWarning, setshowWarning] = useState("");
   const [image, setimage] = useState(null);
   const [video, setVideo] = useState(null);
   const [tweet, settweet] = useState("");
@@ -67,8 +71,8 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
           if (res.success === true) {
             alert("Tweet Upload Successfully");
             settweet("");
-            GetAllTweets()
-            setuploadPublic(false)
+            GetAllTweets();
+            setuploadPublic(false);
           } else {
             alert("Error in Tweet Upload");
           }
@@ -162,10 +166,10 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
         const res = await data.json();
         if (res.success === true) {
           alert("Image Upload Successfully");
-          getImage()
+          getImage();
           setimage(null);
-          setimageCaption("")
-          setuploadPublic(false)
+          setimageCaption("");
+          setuploadPublic(false);
         } else {
           alert("Error in Image Upload");
         }
@@ -254,10 +258,10 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
         const res = await data.json();
         if (res.success === true) {
           alert("Video Upload Successfully");
-          getVideo()
+          getVideo();
           setVideo(null);
-          setvideoCaption("")
-          setuploadPublic(false)
+          setvideoCaption("");
+          setuploadPublic(false);
         } else {
           alert("Error in Video Upload");
         }
@@ -271,39 +275,38 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
     setUploading(false);
   };
   const GotoImage = () => {
-    let box1 = document.querySelector(".data1");
-    let box2 = document.querySelector(".data2");
-    let box3 = document.querySelector(".data3");
-
-    box1.classList.add("hidden");
-    box3.classList.add("hidden");
-    box2.classList.remove("hidden");
+    document.querySelector(".Tweets-Div").classList.add("hidden");
+    document.querySelector(".Images-Div").classList.remove("hidden");
+    document.querySelector(".Videos-Div").classList.add("hidden");
   };
   const gotoVideo = () => {
-    let box1 = document.querySelector(".data1");
-    let box2 = document.querySelector(".data2");
-    let box3 = document.querySelector(".data3");
-
-    box1.classList.add("hidden");
-    box2.classList.add("hidden");
-    box3.classList.remove("hidden");
+    document.querySelector(".Tweets-Div").classList.add("hidden");
+    document.querySelector(".Images-Div").classList.add("hidden");
+    document.querySelector(".Videos-Div").classList.remove("hidden");
   };
   const gotoTweet = () => {
-    let box1 = document.querySelector(".data1");
-    let box2 = document.querySelector(".data2");
-    let box3 = document.querySelector(".data3");
-
-    box3.classList.add("hidden");
-    box2.classList.add("hidden");
-    box1.classList.remove("hidden");
+    document.querySelector(".Tweets-Div").classList.remove("hidden");
+    document.querySelector(".Images-Div").classList.add("hidden");
+    document.querySelector(".Videos-Div").classList.add("hidden");
   };
   return (
     <div className="fixed inset-0 overflow-y-auto bg-gray-500 bg-opacity-50 select-none">
       <div className="flex items-center justify-center h-full min-h-screen">
-        <div className={`${darkMode ? "bg-slate-800" :"bg-white"} p-10 rounded-lg shadow-xl`}>
-          <h1 className={`flex items-center justify-between text-2xl font-bold mb-4`}>
+        <div
+          className={`${
+            darkMode ? "bg-slate-800" : "bg-white"
+          } p-10 rounded-lg shadow-xl`}
+        >
+          <h1
+            className={`flex items-center justify-between text-2xl font-bold mb-4`}
+          >
             Add Public info
-            <IoIosCloseCircle className={`text-4xl ${uploading ? "text-gray-500" : "hover:text-gray-300"} cursor-pointer`} onClick={()=>uploading ? undefined :setuploadPublic(false)}/>
+            <IoIosCloseCircle
+              className={`text-4xl ${
+                uploading ? "text-gray-500" : "hover:text-gray-300"
+              } cursor-pointer`}
+              onClick={() => (uploading ? undefined : setuploadPublic(false))}
+            />
           </h1>
           <div className="flex space-x-4 mb-4">
             <button
@@ -326,37 +329,49 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
             </button>
           </div>
           <div className="">
-            <div className="data1">
+            <div className="Tweets-Div">
               <div className="">
                 <p className="text-2xl font-bold mb-5">
                   Add Tweet to Upload in Public
                 </p>
                 <input
-                  className={`${darkMode && "text-black"} w-full p-2 mb-5 border-2 outline-none`}
+                  className={`${
+                    darkMode && "text-black"
+                  } w-full p-2 mb-5 border-2 outline-none`}
                   style={{ cursor: "pointer" }}
                   type="text"
                   name="tweet"
                   placeholder="Tweet"
                   value={tweet}
                   onChange={(e) => {
-                    tweet.length > 50 ? setshowWarning("tweet") : setshowWarning("")
-                    settweet(e.target.value)
+                    tweet.length > 50
+                      ? setshowWarning("tweet")
+                      : setshowWarning("");
+                    settweet(e.target.value);
                   }}
                 />
-                {showWarning === "tweet" && <p className="text-red-500">Tweet More than 50 Words are prohibited</p> }
+                {showWarning === "tweet" && (
+                  <p className="text-red-500">
+                    Tweet More than 50 Words are prohibited
+                  </p>
+                )}
                 <br />
                 <button
                   className={`flex-1 text-white p-2 rounded ${
-                    uploading || showWarning === "tweet" ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"
+                    uploading || showWarning === "tweet"
+                      ? "bg-gray-500"
+                      : "bg-blue-500 hover:bg-blue-600"
                   } `}
                   style={{ cursor: "pointer" }}
-                  onClick={uploading || showWarning === "tweet" ? "" : tweetUpload}
+                  onClick={
+                    uploading || showWarning === "tweet" ? "" : tweetUpload
+                  }
                 >
                   {uploading ? "Uploading..." : "Upload Tweet"}
                 </button>
               </div>
             </div>
-            <div className="data2 hidden">
+            <div className="Images-Div hidden">
               <div className="">
                 <p className="text-2xl font-bold mb-5">
                   Add Image to Upload in Public
@@ -371,30 +386,45 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
                 />
                 <br />
                 <input
-                  className={`${darkMode && "text-black"} w-full p-2 mb-5 border-2 outline-none`}
+                  className={`${
+                    darkMode && "text-black"
+                  } w-full p-2 mb-5 border-2 outline-none`}
                   type="text"
                   name="caption"
                   placeholder="caption"
                   style={{ cursor: "pointer" }}
                   value={imageCaption}
                   onChange={(e) => {
-                    imageCaption.length > 50 ? setshowWarning("imageCaption") :setshowWarning("")
-                    setimageCaption(e.target.value)}}
+                    imageCaption.length > 50
+                      ? setshowWarning("imageCaption")
+                      : setshowWarning("");
+                    setimageCaption(e.target.value);
+                  }}
                 />
-                {showWarning === "imageCaption" && <p className="text-red-500">Caption More than 50 Words are prohibited</p> }
+                {showWarning === "imageCaption" && (
+                  <p className="text-red-500">
+                    Caption More than 50 Words are prohibited
+                  </p>
+                )}
                 <br />
                 <button
                   className={`flex-1 text-white p-2 rounded ${
-                    uploading || showWarning === "imageCaption" ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"
+                    uploading || showWarning === "imageCaption"
+                      ? "bg-gray-500"
+                      : "bg-blue-500 hover:bg-blue-600"
                   } `}
                   style={{ cursor: "pointer" }}
-                  onClick={uploading || showWarning === "imageCaption" ? "" : uploadImage}
+                  onClick={
+                    uploading || showWarning === "imageCaption"
+                      ? ""
+                      : uploadImage
+                  }
                 >
                   {uploading ? "Uploading..." : "Upload Image"}
                 </button>
               </div>
             </div>
-            <div className="data3 hidden">
+            <div className="Videos-Div hidden">
               <div className="">
                 <p className="text-2xl font-bold mb-5">
                   Add Video to Upload in Public
@@ -409,24 +439,39 @@ const AddPublicInfo = ({setuploadPublic,GetAllTweets,getImage,getVideo}) => {
                 />
                 <br />
                 <input
-                  className={`${darkMode && "text-black"} w-full p-2 mb-5 border-2 outline-none`}
+                  className={`${
+                    darkMode && "text-black"
+                  } w-full p-2 mb-5 border-2 outline-none`}
                   type="text"
                   name="caption"
                   placeholder="caption"
                   style={{ cursor: "pointer" }}
                   value={videoCaption}
                   onChange={(e) => {
-                    videoCaption.length > 50 ? setshowWarning("videoCaption") : setshowWarning("")
-                    setvideoCaption(e.target.value)}}
+                    videoCaption.length > 50
+                      ? setshowWarning("videoCaption")
+                      : setshowWarning("");
+                    setvideoCaption(e.target.value);
+                  }}
                 />
-                {showWarning === "videoCaption" && <p className="text-red-500">Caption More than 50 Words are prohibited</p> }
+                {showWarning === "videoCaption" && (
+                  <p className="text-red-500">
+                    Caption More than 50 Words are prohibited
+                  </p>
+                )}
                 <br />
                 <button
                   className={`flex-1 text-white p-2 rounded ${
-                    uploading || showWarning === "videoCaption" ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"
+                    uploading || showWarning === "videoCaption"
+                      ? "bg-gray-500"
+                      : "bg-blue-500 hover:bg-blue-600"
                   } `}
                   style={{ cursor: "pointer" }}
-                  onClick={uploading || showWarning === "videoCaption" ? "" : uploadVideo}
+                  onClick={
+                    uploading || showWarning === "videoCaption"
+                      ? ""
+                      : uploadVideo
+                  }
                 >
                   {uploading ? "Uploading..." : "Upload Video"}
                 </button>
