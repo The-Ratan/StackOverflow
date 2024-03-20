@@ -28,3 +28,7 @@ export const calleds = atom({
     key:"calleds",
     default:true
 })
+export const renderCalled = atom({
+    key:'renderCalled',
+    default:true
+})
