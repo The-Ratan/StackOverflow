@@ -20,6 +20,18 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+export const getUserPlan = async(req,res)=>{
+  const {id} = req.params;
+  if(!id){
+    return res.status(402).json({msg:"Id is Compulsory"})
+  }
+  const User = await users.findById(id)
+  if(!User){
+    return res.status(404).json({msg:"User Not Found"});
+  }
+  return res.json({success:true,plan:User.Currentplan})
+}
+
 export const updateProfile = async (req, res) => {
   const { id: _id } = req.params;
   const { name, about, tags } = req.body;

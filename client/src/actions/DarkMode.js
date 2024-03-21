@@ -32,3 +32,7 @@ export const renderCalled = atom({
     key:'renderCalled',
     default:true
 })
+export const currentUserPlan = atom({
+    key:'currentPlan',
+    default:''
+})

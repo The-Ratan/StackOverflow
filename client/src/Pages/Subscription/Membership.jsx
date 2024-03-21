@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LocalUrl } from "../../api/index";
 import axios from "axios";
 import logo from "../../assets/icon.png";
+import { useRecoilState } from "recoil";
+import { currentUserPlan } from "../../actions/DarkMode";
 
 function Membership() {
   const User = useSelector((state) => state.currentUserReducer);
+  const [currentPlan,setcurrentPlan] = useRecoilState(currentUserPlan);
   const navigate = useNavigate();
+
   const updateSilverMembership = async () => {
     try {
       if (User) {
@@ -88,6 +92,23 @@ function Membership() {
     }
   };
 
+  const FetchCurrentPlan = async()=>{
+    try{
+      const id = User?.result._id
+      const {data} = await axios.get(`${LocalUrl}user/getUserPlan/${id}`)
+      if(data.success){
+        setcurrentPlan(data.plan)
+      }
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
+  useEffect(()=>{
+    User && FetchCurrentPlan()
+  },[User])
+
   return (
     <div className="main-bar">
       <h1 className="text-2xl font-semibold text-center mb-8">
@@ -95,15 +116,15 @@ function Membership() {
       </h1>
       <h1 className="text-2xl p-2">
         <span className="font-bold">Current Plan </span> -{" "} 
-        {User ? User?.result?.Currentplan : " Login to Check your " } Plan !!
+        {User ? currentPlan : " Login to Check your " } Plan !!
       </h1>
-      {User?.result?.Currentplan === "Free" && (
+      {currentPlan === "Free" && (
         <p className="text-1xl p-2 mb-5">Can Post only 1 question per day.</p>
       )}
-      {User?.result?.Currentplan === "Silver" && (
+      {currentPlan === "Silver" && (
         <p className="text-1xl p-2 mb-5">Can Post only 5 question per day.</p>
       )}
-      {User?.result?.Currentplan === "Gold" && (
+      {currentPlan === "Gold" && (
         <p className="text-1xl p-2 mb-5">
           Can Post Unlimited question per day.
         </p>
@@ -118,13 +139,13 @@ function Membership() {
             <p className="text-gray-600 mb-4">₹100/month</p>
             <p className="text-gray-600 mb-4">Post 5 questions a day</p>
             <button
-              className={`w-full py-2 px-4 ${User?.result?.Currentplan === "Silver" || User?.result?.Currentplan === "Gold" ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"} text-white font-semibold rounded-lg shadow-md  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75`}
-              onClick={User?.result?.Currentplan === "Silver" || User?.result?.Currentplan === "Gold" ? undefined : updateSilverMembership}
+              className={`w-full py-2 px-4 ${currentPlan === "Silver" || currentPlan === "Gold" ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"} text-white font-semibold rounded-lg shadow-md  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75`}
+              onClick={currentPlan === "Silver" || currentPlan === "Gold" ? undefined : updateSilverMembership}
             >
               {!User && "Login to Purchase"}
-              {User?.result?.Currentplan === "Silver" && "Already Bought"}
-              {User?.result?.Currentplan === "Gold" && "Already Have Gold"}
-              {User?.result?.Currentplan === "Free" && "Buy Now"}
+              {currentPlan === "Silver" && "Already Bought"}
+              {currentPlan === "Gold" && "Already Have Gold"}
+              {currentPlan === "Free" && "Buy Now"}
             </button>
           </div>
         </div>
@@ -135,12 +156,12 @@ function Membership() {
             <p className="text-gray-600 mb-4">₹1000/month</p>
             <p className="text-gray-600 mb-4">Post Unlimited questions</p>
             <button
-              className={`w-full py-2 px-4 ${User?.result?.Currentplan === "Gold" ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"} text-white font-semibold rounded-lg shadow-md  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75`}
-              onClick={User?.result?.Currentplan === "Gold" ? undefined :updateGoldMembership}
+              className={`w-full py-2 px-4 ${currentPlan === "Gold" ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-700"} text-white font-semibold rounded-lg shadow-md  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75`}
+              onClick={currentPlan === "Gold" ? undefined :updateGoldMembership}
             >
               {!User && "Login to Purchase"}
-              {User?.result?.Currentplan === "Gold" && "Already Have Gold"}
-              {User?.result?.Currentplan === "Free" || User?.result?.Currentplan === "Silver" ? "Buy Now" : ""}
+              {currentPlan === "Gold" && "Already Have Gold"}
+              {currentPlan === "Free" || currentPlan === "Silver" ? "Buy Now" : ""}
             </button>
           </div>
         </div>
