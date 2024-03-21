@@ -12,7 +12,6 @@ import {
   deleteQuestion,
   voteQuestion,
 } from "../../actions/question";
-import { LocalUrl } from "../../api";
 
 const QuestionsDetails = () => {
   const { id } = useParams();
@@ -23,7 +22,7 @@ const QuestionsDetails = () => {
   const dispatch = useDispatch();
   const User = useSelector((state) => state.currentUserReducer);
   const location = useLocation();
-  const url = LocalUrl;
+  const url = "https://stackoverflow-test.netlify.app"
 
   const handlePostAns = (e, answerLength) => {
     e.preventDefault();
