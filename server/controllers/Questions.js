@@ -6,7 +6,7 @@ export const AskQuestion = async (req, res) => {
   try {
     const postQuestionData = req.body;
     const userId = req.userId;
-    const User = await users.findById(userId);
+    let User = await users.findById(userId);
 
     if (!User) {
       return res.status(404).json("User not found");
@@ -19,13 +19,8 @@ export const AskQuestion = async (req, res) => {
       const expiryDate = new Date(lastPaymentDate);
       expiryDate.setDate(expiryDate.getDate() + 30); //Membership lasts for 30 days
 
-      if (expiryDate < new Date()) {
-        await users.findByIdAndUpdate(userId, { Currentplan: "Free" });
-        return res
-          .status(400)
-          .json(
-            "Your membership has expired. Please renew your plan to continue accessing premium features."
-          );
+      if (User.Currentplan !== "Free" && expiryDate < new Date()) {
+        User = await users.findByIdAndUpdate(userId, { Currentplan: "Free" },{new: true});
       }
     }}
 
