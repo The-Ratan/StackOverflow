@@ -34,7 +34,9 @@ export const signup = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
     );
-    res.status(200).json({ result: newUser, token });
+    const {_id,tags,joinedOn} = await newUser
+
+    res.status(200).json({ result:{_id,name,email,tags,joinedOn}, token });
   } catch (error) {
     res.status(500).json("Something went worng...");
   }
@@ -56,7 +58,8 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
     );
-    res.status(200).json({ result: existinguser, token });
+    const {_id,name,tags,joinedOn} = await existinguser
+    res.status(200).json({ result: {_id,name,email,tags,joinedOn}, token });
   } catch (error) {
     res.status(500).json("Something went worng...");
   }
