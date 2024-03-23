@@ -235,10 +235,10 @@ export const paymentVerfication = async (req, res) => {
       const {_id,name,email,tags,joinedOn} = user
       // Redirect to success page with payment reference and user data
       const userData = encodeURIComponent(JSON.stringify({_id,name,email,tags,joinedOn}));
-      res.redirect(`https://stackoverflow-test.netlify.app/success?reference=${razorpay_payment_id}&user=${userData}`);
+      res.redirect(`https://stack-overflow-lemon-chi.vercel.app/success?reference=${razorpay_payment_id}&user=${userData}`);
 
     } else {
-      return res.redirect(`https://stackoverflow-test.netlify.app/cancel?reference=${razorpay_payment_id}`);
+      return res.redirect(`https://stack-overflow-lemon-chi.vercel.app/cancel?reference=${razorpay_payment_id}`);
     }
   } catch (err) {
     console.log(err);

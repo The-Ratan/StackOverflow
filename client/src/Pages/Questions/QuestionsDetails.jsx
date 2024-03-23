@@ -22,7 +22,7 @@ const QuestionsDetails = () => {
   const dispatch = useDispatch();
   const User = useSelector((state) => state.currentUserReducer);
   const location = useLocation();
-  const url = "https://stackoverflow-test.netlify.app"
+  const url = "https://stack-overflow-lemon-chi.vercel.app"
 
   const handlePostAns = (e, answerLength) => {
     e.preventDefault();
