@@ -22,7 +22,7 @@ const QuestionsDetails = () => {
   const dispatch = useDispatch();
   const User = useSelector((state) => state.currentUserReducer);
   const location = useLocation();
-  const url = "https://stack-overflow-lemon-chi.vercel.app"
+  const url = "https://stackoverflow-test.netlify.app"
 
   const handlePostAns = (e, answerLength) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ const QuestionsDetails = () => {
             .map((question) => (
               <div key={question._id}>
                 <section className="question-details-container">
-                  <h1 className="mb-5 mt-5 font-bold">{question.questionTitle}</h1>
+                  <h1 className="mb-5 mt-5 font-bold w-full" style={{ wordBreak: 'break-all' }}>{question.questionTitle}</h1>
                   <div className="question-details-container-2">
                     <div className="question-votes">
                       <TiArrowSortedUp onClick={handleUpVote} className="cursor-pointer text-4xl hover:text-orange-500"/>

@@ -16,7 +16,7 @@ const Questions = ({ question }) => {
         <p>{question.noOfAnswers}</p>
         <p>answers</p>
       </div>
-      <div className="display-question-details">
+      <div className="display-question-details overflow-hidden">
         <Link to={`/Questions/${question._id}`} className="question-title-link">
           {question.questionTitle.length > (window.innerWidth <= 400 ? 70 : 90)
             ? question.questionTitle.substring(
