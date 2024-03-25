@@ -92,7 +92,7 @@ const QuestionsDetails = () => {
                       <TiArrowSortedDown onClick={handleDownVote} className="cursor-pointer text-4xl hover:text-orange-500"/>
                     </div>
                     <div style={{ width: "100%" }}>
-                      <p className="question-body">{question.questionBody}</p>
+                      <p className="question-body" style={{ wordBreak: 'break-all' }}>{question.questionBody}</p>
                       <div className="question-details-tags">
                         {question.questionTags.map((tag) => (
                           <p key={tag}>{tag}</p>
