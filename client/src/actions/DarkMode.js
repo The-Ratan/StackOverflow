@@ -36,3 +36,7 @@ export const currentUserPlan = atom({
     key:'currentPlan',
     default:''
 })
+export const UserPayments = atom({
+    key:'UserPayments',
+    default:[]
+})

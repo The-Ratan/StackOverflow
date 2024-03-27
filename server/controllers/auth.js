@@ -34,9 +34,11 @@ export const signup = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
     );
-    const {_id,tags,joinedOn} = await newUser
+    const { _id, tags, joinedOn } = await newUser;
 
-    res.status(200).json({ result:{_id,name,email,tags,joinedOn}, token });
+    res
+      .status(200)
+      .json({ result: { _id, name, email, tags, joinedOn }, token });
   } catch (error) {
     res.status(500).json("Something went worng...");
   }
@@ -58,8 +60,10 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
     );
-    const {_id,name,tags,joinedOn} = await existinguser
-    res.status(200).json({ result: {_id,name,email,tags,joinedOn}, token });
+    const { _id, name, tags, joinedOn } = await existinguser;
+    res
+      .status(200)
+      .json({ result: { _id, name, email, tags, joinedOn }, token });
   } catch (error) {
     res.status(500).json("Something went worng...");
   }
@@ -219,26 +223,44 @@ export const paymentVerfication = async (req, res) => {
       .digest("hex");
 
     if (expectedSignature === razorpay_signature) {
-       // Update the user document to add the new payment
-       const user = await users.findByIdAndUpdate(id, {
-        Currentplan,
-        $push: {
-          payments: {
-            planName:Currentplan,
-            razorpay_payment_id,
-            razorpay_order_id,
-            razorpay_signature,
-            purchasedOn: new Date(),
+      // Update the user document to add the new payment
+      const user = await users.findByIdAndUpdate(
+        id,
+        {
+          Currentplan,
+          $push: {
+            payments: {
+              planName: Currentplan,
+              razorpay_payment_id,
+              razorpay_order_id,
+              razorpay_signature,
+              purchasedOn: new Date(),
+            },
           },
         },
-      },{ new: true });
-      const {_id,name,email,tags,joinedOn} = user
-      // Redirect to success page with payment reference and user data
-      const userData = encodeURIComponent(JSON.stringify({_id,name,email,tags,joinedOn}));
-      res.redirect(`https://stack-overflow-lemon-chi.vercel.app/success?reference=${razorpay_payment_id}&user=${userData}`);
+        { new: true }
+      );
+      const { _id, name, email, tags, joinedOn } = user;
+      const Reciept = {
+        planName: Currentplan,
+        razorpay_payment_id,
+        razorpay_order_id,
+        razorpay_signature,
+        purchasedOn: new Date(),
+      };
+      const recieptData = encodeURIComponent(JSON.stringify(Reciept));
 
+      // Redirect to success page with payment reference and user data
+      const userData = encodeURIComponent(
+        JSON.stringify({ _id, name, email, tags, joinedOn })
+      );
+      res.redirect(
+        `https://stackoverflow-test.netlify.app/success?reference=${recieptData}&user=${userData}`
+      );
     } else {
-      return res.redirect(`https://stack-overflow-lemon-chi.vercel.app/cancel?reference=${razorpay_payment_id}`);
+      return res.redirect(
+        `https://stackoverflow-test.netlify.app/cancel?reference=${razorpay_payment_id}`
+      );
     }
   } catch (err) {
     console.log(err);

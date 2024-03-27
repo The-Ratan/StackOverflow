@@ -29,7 +29,7 @@ export const getUserPlan = async(req,res)=>{
   if(!User){
     return res.status(404).json({msg:"User Not Found"});
   }
-  return res.json({success:true,plan:User.Currentplan})
+  return res.json({success:true,plan:User.Currentplan,payment:User.payments})
 }
 
 export const updateProfile = async (req, res) => {
