@@ -240,7 +240,7 @@ function Membership() {
         <div className="flex-grow max-w-xs rounded-lg overflow-hidden bg-white shadow-lg">
           <div className="p-6">
             <h2 className="text-xl font-semibold mb-4 text-black">Gold Plan</h2>
-            <p className="text-gray-600 mb-4">₹1000/month</p>
+            <p className="text-gray-600 mb-4">{currentPlan === "Silver" ?<><span className="mr-5  line-through">₹1000/month</span><span className="font-bold">₹900/month</span></> : "₹1000/month" }</p>
             <p className="text-gray-600 mb-4">Post Unlimited questions</p>
             <button
               className={`w-full py-2 px-4 ${
