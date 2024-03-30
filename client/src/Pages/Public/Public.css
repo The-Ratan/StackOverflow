@@ -1,0 +1,100 @@
+.box1{
+    margin-bottom: 1rem;
+    border-radius: 2rem;
+    border: 2px solid #F1E5BC;
+    padding: 20px;
+}
+.tweeet{
+    text-align: center;
+    font-weight: bolder;
+    color: #CB8B4B;
+}
+.messsss{
+    font-size: 2rem;
+}
+.extra-Details{
+    text-align: right;
+}
+.atat{
+    text-align: right;
+}
+.postee{
+    color: #FA9A45;
+}
+.btnss{
+    display: flex;
+}
+.btnss button {
+        background: #e7f8fe;
+        width: 30%;
+        height: 3rem;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-right: 10px;
+}
+.btnss button:hover{
+    background: #D3E4EB;
+}
+.mainVideo{
+    min-height: 100vh;
+  height: 100%;
+    width: 100vw;
+}
+.mainVideo1{
+    position: absolute;
+    display: flex;
+    top: 0;
+}
+.mainVideo2{
+    min-height: 100vh;
+  height: 100%;
+
+    width: 47vw;
+}
+.mainVideo3{
+    min-height: 100vh;
+  height: 100%;
+  width: 6vw;
+}
+.mainVideo4{
+    min-height: 100vh;
+  height: 100%;
+  width: 47vw;
+}
+@media screen and (max-width:1072px) {
+    .mainVideo2{
+        min-height: 100vh;
+  height: 100%;
+  width: 45vw;
+    }
+    .mainVideo3{
+  height: 100%;
+        min-height: 100vh;
+        width: 10vw;
+    }
+    .mainVideo4{
+  height: 100%;
+        
+        min-height: 100vh;
+        width: 45vw;
+    }
+}
+.player-wrapper {
+    position: relative;
+    width: 100vw;
+  height: 100%;
+  min-height: 100vh;
+    overflow: hidden;
+   }
+   
+   .player-wrapper video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+   }
