@@ -40,3 +40,7 @@ export const UserPayments = atom({
     key:'UserPayments',
     default:[]
 })
+export const SetWhether = atom({
+    key:'Whether',
+    default:{}
+})

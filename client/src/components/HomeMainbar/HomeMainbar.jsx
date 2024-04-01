@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 import "./HomeMainbar.css";
 import QuestionList from "./QuestionList";
 import { MdDarkMode } from "react-icons/md";
-import { darkModes } from "../../actions/DarkMode";
-import { useRecoilState } from "recoil";
+import { darkModes, SetWhether } from "../../actions/DarkMode";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { Audio } from 'react-loader-spinner'
 
 const HomeMainbar = () => {
   const [darkMode,setDarkMode] = useRecoilState(darkModes)
+  const whether = useRecoilValue(SetWhether)
   const location = useLocation();
   const user = 1;
   const navigate = useNavigate();
@@ -47,6 +48,13 @@ const HomeMainbar = () => {
         </span>
         </div>
       </div>
+        <span className="flex items-end justify-end gap-5 p-2 mt-5">
+          {whether && (
+            <>
+            Wheather-: <span className="font-bold">{whether.data}</span>
+            <img className=" border-none" src={whether.img} width={20} height={20}/>
+            </>)}
+        </span>
       <div>
         {questionsList.data === null ? (
           <div className="mt-10 flex items-center justify-center flex-col">
@@ -63,7 +71,7 @@ const HomeMainbar = () => {
         </div>
         ) : (
           <>
-            <p className="mt-5 mb-5">{questionsList.data.length} questions</p>
+            <p className="mb-5">{questionsList.data.length} questions</p>
             <QuestionList questionsList={questionsList.data} />
           </>
         )}
