@@ -30,7 +30,7 @@ const Home = ({ slideIn,handleSlideIn }) => {
         <RightSidebar />
       </div>
     </div>
-    <div className="w-full flex items-end justify-end p-2 pr-2 top-[-10rem] left-[-1rem] rounded-full relative">
+    <div className="flex items-end ml-[80%] md:ml-[80%] lg:ml-[90%] p-2 pr-2 top-[-10rem] left-[-1rem] rounded-full relative">
     <Link to={"/chatbot"}>
       <img
         src="/bot.gif"
