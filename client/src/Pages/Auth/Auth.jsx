@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import { useRecoilValue } from "recoil";
 const Auth = () => {
   const darkMode = useRecoilValue(darkModes)
   const [isSignup, setIsSignup] = useState(false);
+  const [showWarning,setShowWarning] = useState(false)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,11 +30,17 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true)
     if (!email && !password) {
-      alert("Enter email and password");
+      setLoading(false)
+      return alert("Enter email and password");
     }
     if (isSignup) {
       if (!name) {
-        alert("Enter a name to continue");
+        setLoading(false)
+        return alert("Enter a name to continue");
+      }
+      if(showWarning){
+        setLoading(false)
+        return alert("Name should be less then or equal to 15 characters.")
       }
       dispatch(signup({ name, email, password }, navigate));
     } else {
@@ -41,6 +48,15 @@ const Auth = () => {
     }
     setLoading(false)
   };
+
+  useEffect(()=>{
+    if(name.length > 15) {
+      setShowWarning(true)
+    }
+    else{
+      setShowWarning(false)
+    }
+  },[name])
 
   return (
     <section className={`auth-section ${darkMode ? "bg-slate-800 text-white" : "text-black"}`}>
@@ -61,6 +77,9 @@ const Auth = () => {
                   setName(e.target.value);
                 }}
               />
+              {showWarning && (
+                <p className="text-red-500 text-[0.8rem]">Your display name should be less than or equal to 15 characters.</p>
+              )}
             </label>
           )}
           <label htmlFor="email">

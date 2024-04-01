@@ -124,7 +124,7 @@ const QuestionsDetails = () => {
                             >
                               {question.userPosted.charAt(0).toUpperCase()}
                             </Avatar>
-                            <div>{question.userPosted}</div>
+                            <div className="break-words" style={{wordBreak: "break-all"}}>{question.userPosted}</div>
                           </Link>
                         </div>
                       </div>
